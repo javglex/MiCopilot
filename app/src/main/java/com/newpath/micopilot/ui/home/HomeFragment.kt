@@ -37,11 +37,6 @@ class HomeFragment : Fragment() {
             false
         )
 
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            Timber.d("Observed texthome")
-
-            binding.textHome.text = it
-        })
 
         homeViewModel.location.observe(viewLifecycleOwner, Observer {
             Timber.d("Observed location")
@@ -55,15 +50,8 @@ class HomeFragment : Fragment() {
                 binding.textOrientation.text = it.contentToString()
         })
 
-        homeViewModel.searcharea.observe(viewLifecycleOwner, Observer {
-            Timber.d("Observed search area")
-            if(it!=null)
-                binding.textSearchArea.text = it.toString()
-        })
-
-        binding.btnRequestOrientation.setOnClickListener {
-            homeViewModel.requestOrientation()
-        }
+        binding.homeViewModel = homeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
 
