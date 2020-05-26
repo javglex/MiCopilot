@@ -38,18 +38,6 @@ class HomeFragment : Fragment() {
         )
 
 
-        homeViewModel.location.observe(viewLifecycleOwner, Observer {
-            Timber.d("Observed location")
-            if(it!=null)
-                binding.textGpsCoord.text = "acc: " + it.accuracy + " loc: " + it.latitude + " ,"+it.longitude
-        })
-
-        homeViewModel.orientation.observe(viewLifecycleOwner, Observer {
-            Timber.d("Observed orientation")
-            if(it!=null)
-                binding.textOrientation.text = it.contentToString()
-        })
-
         binding.homeViewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 

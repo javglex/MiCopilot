@@ -3,6 +3,7 @@ package com.newpath.micopilot.ui.home
 import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.newpath.micopilot.models.GPSPoint
 import com.newpath.micopilot.utils.AreaData
@@ -17,10 +18,19 @@ class HomeViewModel : ViewModel() {
     private val _location = MutableLiveData<Location>()
     val location: LiveData<Location>
         get() = _location
+    // The String version of the location
+    val locationString = Transformations.map(location) { l ->
+        "acc: " + l.accuracy + " loc: " + l.latitude + " ,"+l.longitude
+    }
 
     private val _orientation = MutableLiveData<FloatArray>()
     val orientation: LiveData<FloatArray>
         get() = _orientation
+
+    // The String version of the orientation
+    val orientationString = Transformations.map(orientation) { o ->
+        o.contentToString()
+    }
 
     private val _searcharea = MutableLiveData<List<GPSPoint>>()
     val searcharea: LiveData<List<GPSPoint>>
