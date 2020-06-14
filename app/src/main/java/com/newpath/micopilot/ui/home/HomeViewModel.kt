@@ -20,7 +20,7 @@ class HomeViewModel : ViewModel() {
         get() = _location
     // The String version of the location
     val locationString = Transformations.map(location) { l ->
-        "acc: " + l.accuracy + " loc: " + l.latitude + " ,"+l.longitude
+        "acc: " + l?.accuracy + " loc: " + l?.latitude + " ,"+l?.longitude
     }
 
     private val _orientation = MutableLiveData<FloatArray>()
