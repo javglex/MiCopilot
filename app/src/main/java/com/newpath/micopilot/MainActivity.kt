@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume(){
         super.onResume()
+
         fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
             viewModel.setLocation(location)
             Timber.d("successlistener fired");

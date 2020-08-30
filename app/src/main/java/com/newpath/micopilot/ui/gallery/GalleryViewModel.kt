@@ -18,7 +18,7 @@ class GalleryViewModel : ViewModel() {
         value = "This is gallery Fragment"
     }
 
-    private val _property = MutableLiveData<List<TafDataModel>>()
+    val _property = MutableLiveData<List<TafDataModel>>()
 
 
     val text: LiveData<String> = _text
