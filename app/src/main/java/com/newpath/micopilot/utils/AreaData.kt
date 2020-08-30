@@ -30,6 +30,25 @@ class AreaData(origin: GPSPoint) {
     }
 
     /**
+     * alternative to map area (depending on API) returns a flight path
+     * that consists of two points and a width (Statute miles)
+     * @param rotationAngle - device's rotation / magnetic heading
+     */
+    fun generateflightPath(rotationAngle: Double, widthNM: Double): List<GPSPoint>{
+
+        val widthMinsns:  Double = 0.0 //compensate for the flight plan width applies to our coordinates
+        val widthMins:  Double = (1/60)*widthNM //compensate for the flight plan width applies to our coordinates
+
+        var startPoint: GPSPoint = GPSPoint(origin.X, origin.Y+widthMins)
+        var endPoint: GPSPoint = GPSPoint(origin.X, origin.Y + length + widthMins)
+        startPoint.rotate(origin, rotationAngle)
+        endPoint.rotate(origin, rotationAngle)
+
+        return listOf(startPoint,endPoint)
+
+    }
+
+    /**
      * generates our four points to define our search area
      * @param - rotation to apply to search area given in radians
      */

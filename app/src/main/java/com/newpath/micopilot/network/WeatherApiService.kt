@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val BASE_URL =
     "https://aviationweather.gov/adds/"
@@ -32,8 +33,9 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface TafApiService {
-    @GET("dataserver_current/httpparam?datasource=tafs&requesttype=retrieve&minLat=37&minLon=-122&maxLat=38.5&maxLon=-121&hoursBeforeNow=3")
-    fun getProperties():
+//    @GET("dataserver_current/httpparam?datasource=tafs&requesttype=retrieve&minLat=37&minLon=-122&maxLat=38.5&maxLon=-121&hoursBeforeNow=3")
+    @GET("dataserver_current/httpparam?datasource=tafs&requesttype=retrieve&hoursBeforeNow=3")
+    fun getProperties(@Query("flightPath") flightPath:String):
             Call<TafDataList>
 }
 

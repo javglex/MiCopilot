@@ -1,15 +1,16 @@
 package com.newpath.micopilot.ui.home
 
+import android.app.Application
 import android.location.Location
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.newpath.micopilot.models.GPSPoint
 import com.newpath.micopilot.utils.AreaData
+import com.newpath.micopilot.utils.SharedPrefs
 import timber.log.Timber
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel: ViewModel() {
+
+
 
     private val _text = MutableLiveData<String>()
     val text: LiveData<String>
@@ -73,8 +74,8 @@ class HomeViewModel : ViewModel() {
         var searchArea: AreaData = AreaData(origin)
 
         if (_orientation.value?.get(0)!=null) {
-            var rotation: Double = _orientation.value!![0].toDouble();
-            var areaPoints: List<GPSPoint> = searchArea.generateMapArea(rotation)
+            var rotation: Double = _orientation.value!![0].toDouble()
+            var areaPoints: List<GPSPoint> = searchArea.generateflightPath(rotation,15.0)
             _searcharea.value = areaPoints
             return
         }

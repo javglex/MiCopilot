@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.newpath.micopilot.R
 import com.newpath.micopilot.adapter.AirportAdapter
 import com.newpath.micopilot.databinding.FragmentGalleryBinding
+import com.newpath.micopilot.models.GPSPoint
+import com.newpath.micopilot.utils.SharedPrefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -39,6 +41,10 @@ class GalleryFragment : Fragment() {
 
         val adapter = AirportAdapter()
         binding.rvAirportList.adapter = adapter
+
+        val searchArea: List<GPSPoint>? = SharedPrefs.getInstance(context).searchArea
+        if (!searchArea.isNullOrEmpty())
+            galleryViewModel.getTafData(searchArea[0].X, searchArea[0].Y, searchArea[1].X, searchArea[1].Y, 15.0)
 
         galleryViewModel._property.observe(viewLifecycleOwner, Observer {
             it?.let{
