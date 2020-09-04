@@ -39,10 +39,11 @@ class AreaData(origin: GPSPoint) {
         val widthMinsns:  Double = 0.0 //compensate for the flight plan width applies to our coordinates
         val widthMins:  Double = (1/60)*widthNM //compensate for the flight plan width applies to our coordinates
 
-        var startPoint: GPSPoint = GPSPoint(origin.X, origin.Y+widthMins)
-        var endPoint: GPSPoint = GPSPoint(origin.X, origin.Y + length + widthMins)
-        startPoint.rotate(origin, rotationAngle)
-        endPoint.rotate(origin, rotationAngle)
+        var startPoint: GPSPoint = GPSPoint(origin.X, origin.Y)
+        var lengthVectorPoint: GPSPoint = GPSPoint(length.toDouble(),0.0)
+        var endPoint: GPSPoint
+        lengthVectorPoint.rotate(GPSPoint(0.0,0.0), rotationAngle)
+        endPoint = startPoint + lengthVectorPoint
 
         return listOf(startPoint,endPoint)
 
